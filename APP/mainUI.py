@@ -9,7 +9,8 @@ from tab_baitap import TabBaiTap
 class MainUI(Frame): 
 
     def __init__(self, parent, code): 
-        self.parent = parent
+        parent.destroy()
+        self.parent = Tk()
         self.code = code
         super(MainUI,self).__init__(self.parent)
         self.init() 
@@ -51,13 +52,13 @@ class MainUI(Frame):
         self.style = Style()
         self.style.configure('TopMainUI.TButton' , foreground='#FF0000', font= ("SF Mono",10,"bold"), background='#FFFFFF')
 
-        img_1 = PhotoImage(file="./script/image/notebook.png")
+        img_1 = PhotoImage(file="./APP/image/notebook.png")
         self.bt1 = bt1 = Button(top_frame,text="Bài tập", image=img_1,compound="left",
                         style='TopMainUI.TButton', command=lambda: self.click_bt1())
         bt1.image = img_1
         bt1.pack(side=LEFT,fill=Y,padx=0,pady=0)
 
-        img_2 = PhotoImage(file="./script/image/rank.png")
+        img_2 = PhotoImage(file="./APP/image/rank.png")
         self.bt2 = bt2 = Button(top_frame,text="Bảng xếp hạng", image=img_2,compound="left",
                         style='TopMainUI.TButton', command=lambda: self.click_bt2())
         bt2.image = img_2

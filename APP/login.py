@@ -19,12 +19,12 @@ class Login(Frame):
         self.style.theme_use("xpnative")
         self.pack(fill=BOTH, expand=1)
         
-        imgLogo = ImageTk.PhotoImage(Image.open("./script/image/logo_ptit.png"))
-        imgNotice = ImageTk.PhotoImage(Image.open("./script/image/notice.png"))
-        imgEntry = ImageTk.PhotoImage(Image.open('./script/image/Rectangle 1.png'))
+        imgLogo = ImageTk.PhotoImage(Image.open("./APP/image/logo_ptit.png"))
+        imgNotice = ImageTk.PhotoImage(Image.open("./APP/image/notice.png"))
+        imgEntry = ImageTk.PhotoImage(Image.open('./APP/image/Rectangle 1.png'))
 
         self.configs = ConfigParser()
-        self.configs.read('./script/login.properties')
+        self.configs.read('./APP/login.properties')
         username = self.configs['form']['user']
         password = self.configs['form']['pass']
         remember = self.configs['form']['remember']
@@ -76,7 +76,7 @@ class Login(Frame):
         cb = Checkbutton(form, text= "Ghi nhớ", variable=self.remember, cursor="hand2")
         cb.pack(side=TOP, anchor=NW, pady=(5,2))
 
-        imgBt = ImageTk.PhotoImage(Image.open('./script/image/loginBt.png'))
+        imgBt = ImageTk.PhotoImage(Image.open('./APP/image/loginBt.png'))
         bt = Button(form, image=imgBt, text= "Đăng nhập", border=0, command=self.login, cursor="hand2")
         bt.image = imgBt
         bt.pack(fill= 'x', side= TOP,expand= True)
@@ -85,7 +85,7 @@ class Login(Frame):
         self.configs['form']['user'] = username
         self.configs['form']['pass'] = password
         self.configs['form']['remember'] = remember
-        with open('./script/login.properties', 'w') as configfile:
+        with open('./APP/login.properties', 'w') as configfile:
             self.configs.write(configfile)
 
 
@@ -124,15 +124,15 @@ def display_msg():
     root.after(3000, root.quit)
 
 
-# if __name__ == "__main__":
-#     root = Tk()
-#     root.geometry("300x380+614+187")
-#     root.configure(background="white")
-#     # root.update()
+if __name__ == "__main__":
+    root = Tk()
+    root.geometry("300x380+614+187")
+    root.configure(background="white")
+    # root.update()
 
-#     code = 1
-#     code = CodePtit()
-#     start = Login(root,code)
-#     root.protocol('WM_DELETE_WINDOW', display_msg)
-#     root.mainloop()
-#     code.driver.quit()
+    code = 1
+    code = CodePtit()
+    start = Login(root,code)
+    root.protocol('WM_DELETE_WINDOW', display_msg)
+    root.mainloop()
+    code.driver.quit()

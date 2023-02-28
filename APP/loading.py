@@ -5,17 +5,17 @@ from tkinter.ttk import  Style, Label, Progressbar
 from PIL import Image
 from threading import Thread
 from Code_ptit import *
-from app import App
+from mainUI import MainUI
 
 class Loading(Frame): 
     def __init__(self, parent, code): 
-        # parent.destroy()
-        self.parent = parent
+        parent.destroy()
+        self.parent = Tk()
         self.code = code
         Frame.__init__(self,self.parent)
         self.init() 
         self.load()
-        App(self.parent,code)
+        MainUI(self.parent,code)
 
     def image_to_data(im):
         with BytesIO() as output:
@@ -34,7 +34,7 @@ class Loading(Frame):
 
         self.pack(side=TOP,fill=BOTH, expand=1)
 
-        file="./script/image/loading_data.gif"
+        file="./APP/image/loading_data.gif"
         self.imgGif = Image.open(file)
         self.frames = self.imgGif.n_frames
         self.list_fr = []

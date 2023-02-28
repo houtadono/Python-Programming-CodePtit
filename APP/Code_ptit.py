@@ -41,7 +41,7 @@ class CodePtit:
         edge_options.add_experimental_option('excludeSwitches', ['enable-logging'])
         # edge_options.add_argument("--headless")
         # edge_options.add_argument("user-data-dir=C:\\Users\\Houta\\AppData\\Local\\Microsoft\\Edge\\User Data1")
-        self.driver = Edge( service=Service('./script/msedgedriver.exe'), options= edge_options)
+        self.driver = Edge( service=Service('./APP/msedgedriver.exe'), options= edge_options)
         self.driver.set_window_size(800,800) 
         self.time = time.time()
         pass

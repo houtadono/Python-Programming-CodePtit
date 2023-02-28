@@ -50,7 +50,7 @@ class TabBaiTap(Frame):
             "ttttk"
         ]
 
-        imglbl = ImageTk.PhotoImage(Image.open('./script/image/Rectangle 1.png'))
+        imglbl = ImageTk.PhotoImage(Image.open('./APP/image/Rectangle 1.png'))
         
         lbl_search = Label(top_frame,image=imglbl)
         lbl_search.image = imglbl
