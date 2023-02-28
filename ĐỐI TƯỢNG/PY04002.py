@@ -11,8 +11,6 @@ class Rectangle:
 		return self.x*self.y
 	def color(self):
 		return c.title()
-		
-
 
 a,b,c = input().split()
 r = Rectangle(int(a),int(b),c)
