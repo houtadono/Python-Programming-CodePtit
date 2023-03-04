@@ -23,7 +23,7 @@ class ToolTip(object):
         label = Label(tw, text=self.text, justify=LEFT,
                     background="#FF9999", foreground="#003366",
                     relief=SOLID, borderwidth=1,
-                    font=("Seoge UI", "11"))
+                    font=("Segoe UI", "11"))
         label.pack(ipadx=1)
 
     def hidetip(self):

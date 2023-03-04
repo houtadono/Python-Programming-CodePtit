@@ -20,12 +20,12 @@ class EachBaiTap(Frame):
     def init(self):
         self.pack(fill=BOTH, expand=True)
         self.update()
-        print(self.winfo_width())
+        
         top_f = Frame(self)
         top_f.pack(side=TOP,fill=X,expand=True)
         btBack = Button(top_f,text="Trở về",command= self.back)
         btBack.pack(side=LEFT)
-        Label(top_f,text=f"{self.ex.id} - {self.ex.name}", font=("Seoge UI",14,"bold"), foreground="red", border=0).pack(side=RIGHT)
+        Label(top_f,text=f"{self.ex.id} - {self.ex.name}", font=("Segoe UI",14,"bold"), foreground="red", border=0).pack(side=RIGHT)
         s = Style()
         
 

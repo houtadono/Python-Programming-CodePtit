@@ -37,18 +37,24 @@ class CodePtit:
 
     def __init__(self):
         edge_options = EdgeOptions()
+        edge_options.add_argument("disable-gpu")
+        edge_options.add_argument("no-sandbox")
+        edge_options.add_argument("disable-dev-shm-usage")
         edge_options.use_chromium = True
         edge_options.add_experimental_option('excludeSwitches', ['enable-logging'])
         # edge_options.add_argument("--headless")
         # edge_options.add_argument("user-data-dir=C:\\Users\\Houta\\AppData\\Local\\Microsoft\\Edge\\User Data1")
         self.driver = Edge( service=Service('./APP/msedgedriver.exe'), options= edge_options)
         self.driver.set_window_size(800,800) 
-        self.time = time.time()
+        self.driver.get('https://code.ptit.edu.vn/login')
         pass
 
     def login(self, username, password):
-        self.driver.get('https://code.ptit.edu.vn/login')
-        self.driver.implicitly_wait(3)   
+
+        if self.driver.title != 'Đăng nhập':
+            self.driver.get('https://code.ptit.edu.vn/login')        
+            self.driver.implicitly_wait(3)   
+
         self.driver.find_element(By.ID, 'login__user').send_keys(username)
         self.driver.find_element(By.ID, 'login__pw').send_keys(password)
         self.driver.find_element(By.XPATH, '/html/body/div[3]/div[1]/div/div[3]/div/form/button').click()
@@ -106,6 +112,7 @@ class CodePtit:
         self.ID = list(map(lambda x : x[0], tmp))
         self.TOPIC = sorted(self.TOPIC)
 
+    @staticmethod
     def load_exercise_each_thread(browser, barrier, page_idex, topic, exercise):
         browser.driver.get('https://code.ptit.edu.vn/student/question?page=%d' %(page_idex))
         browser.driver.implicitly_wait(1)   
@@ -161,16 +168,46 @@ class CodePtit:
         attrs = BeautifulSoup(html, 'html.parser')
         return attrs
 
-    def upload_code(self,id):
+    def upload_code(self,id,path_file):
         self.driver.get('https://code.ptit.edu.vn/student/question/'+id)
-        self.driver.find_element(By.ID, 'fileInput').send_keys(os.path.abspath( id+'.py' ))
+        self.driver.find_element(By.ID, 'fileInput').send_keys(path_file)
         self.driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/div/div/div[4]/form/button').click()
-    
+        time.sleep(1.4)
+        try:
+            return self.driver.find_element(By.TAG_NAME,'td').text # status
+        except:
+            return None
+
+    def get_result(self,id, status):
+        if status == None:
+            return 
+        if self.driver.title != 'Lịch sử':
+            self.driver.get('https://code.ptit.edu.vn/student/history')
+            self.driver.implicitly_wait(3)   
+        res = ''
+        while 1:
+            try: 
+                res = self.driver.find_element(By.CSS_SELECTOR,'#status_%s > a > span' %(status) ).text
+                break
+            except:
+                continue
+
+        color = 'Red'
+        self.EXERCISES[id].color = color
+
+        if res == 'AC':
+            color = 'Green'
+            self.EXERCISES[id].color = color
+        elif res == 'CE':
+            color = 'Black'
+        return res, color
 
 
 # a = CodePtit()
 # a.login('b20dcat066','t1 houta1')
 # a.create_thread()
+# print(a.upload_code('PY01020','D:\\CodeSpace\\CodePtitPython\\BIẾN VÀ KIỂU DỮ LIỆU ĐƠN GIẢN\\PY01020.py'))
+
 # a.auto_create_file_exercise(True)
 
 # attrs = a.see_ex('ICPC0115')

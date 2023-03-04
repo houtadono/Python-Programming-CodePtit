@@ -45,7 +45,7 @@ class Loading(Frame):
             length=200, mode="determinate", value=0, maximum= 101)
         self.bar.place(x= 80, y= 310)
 
-        self.lbl_load = Label(self.lbl,text=self.update_progress_label(), font=("Seogeo UI",12), background='#0061ff', foreground='white')
+        self.lbl_load = Label(self.lbl,text=self.update_progress_label(), font=("Segoe UI",12), background='#0061ff', foreground='white')
         self.lbl_load.place(x= 150, y = 155)
         
         self.lbl.bind("<Button-1>", self.animation(1))
