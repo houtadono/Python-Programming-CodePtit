@@ -57,7 +57,7 @@ class CodePtit:
 
         self.driver.find_element(By.ID, 'login__user').send_keys(username)
         self.driver.find_element(By.ID, 'login__pw').send_keys(password)
-        self.driver.find_element(By.XPATH, '/html/body/div[3]/div[1]/div/div[3]/div/form/button').click()
+        self.driver.find_element(By.TAG_NAME, 'button').click()
         self.username = username
         self.password = password 
         if self.driver.current_url != 'https://code.ptit.edu.vn/login':

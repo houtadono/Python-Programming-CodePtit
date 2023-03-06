@@ -25,6 +25,7 @@ class Login(Frame):
 
         self.configs = ConfigParser()
         self.configs.read('./APP/login.properties')
+
         username = self.configs['form']['user']
         password = self.configs['form']['pass']
         remember = self.configs['form']['remember']
@@ -121,7 +122,7 @@ class Login(Frame):
 def display_msg():
     msg = Label(root, text='Thank You!')
     msg.pack()
-    root.after(3000, root.quit)
+    root.after(500, root.quit)
 
 
 if __name__ == "__main__":
