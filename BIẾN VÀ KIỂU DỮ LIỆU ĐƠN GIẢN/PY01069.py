@@ -1,7 +1,8 @@
+result = []
 
 def generate(i, s, n2, n3, n5, n7):
     if n2*n3*n5*n7 != 0 and s[-1] != '2':
-        print(s)
+        result.append(s)
     if i == n:
         return
     i+=1
@@ -14,5 +15,8 @@ def generate(i, s, n2, n3, n5, n7):
 n = int(input())
 
 generate(0, '', 0, 0, 0, 0)
+result.sort(key=lambda x: len(x))
+for i in result:
+    print(i)
 
 # done
